@@ -1,0 +1,9 @@
+<?php
+    session_start();
+    require_once "connection.php";
+    $stmt = $conn->prepare('SELECT total_cash,total_assets FROM user WHERE user_id=:userid');
+    $stmt->bindParam(':userid', $_SESSION['login_id']);
+    $stmt->execute();
+    $row=$stmt->fetch(PDO::FETCH_OBJ);
+    echo json_encode($row);
+?>

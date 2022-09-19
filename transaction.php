@@ -1,0 +1,33 @@
+<?php 
+session_start();
+	require_once("connection.php");
+	try{
+
+		$id=$_SESSION["login_id"];
+		
+	
+		$stmt=$conn->prepare("SELECT t.buyer_id, c.comp_name, no_stocks, stock_price as total_price, `time` from `all_transactions` t, company c,user 
+			where user.user_id=:userId1 and t.comp_id = c.comp_id and (t.buyer_id=user.user_id OR t.seller_id=user.user_id) order by `time` desc");
+
+			$userid=NULL;
+			$stmt->bindParam(':userId1',$userid);
+			$userid=intval($id);
+			$stmt->execute();
+		
+		//$result=$stmt->setFetchMode(PDO::FETCH_NUM);
+		$i=1;
+		foreach ($stmt as $row) {
+			if($row[0]==$id)		
+				echo "<tr><th scope='row'> $i </th><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[2]*$row[3]."</td> <td style='color:green'>Purchased</td> </tr>";
+	  		else 
+		  		echo "<tr><th scope='row'> $i </th><td>".$row[1]."</td><td>".$row[2]."</td><td>".$row[2]*$row[3]."</td> <td style='color:red'>Sold  </td> </tr>";
+	  			
+	  			$i++;
+  		}
+  		
+	}
+	catch(Exception $e){
+		echo "Error Message: "+$e->getMessage();
+	}
+	
+?>

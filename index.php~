@@ -1,0 +1,842 @@
+<?php
+//include('session.php');
+session_start();
+if(!isset($_SESSION['login_id'])){
+    header("location: sign-in.php");
+}
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Welcome To | WallStreet</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Select Css -->
+    <link href="plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+    <!-- Bootstrap Core Css -->
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="plugins/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="css/themes/all-themes.css" rel="stylesheet" />
+
+</head>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html">WALLSTREET</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">equalizer</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div style="display: -webkit-box;">
+                    <div class="info-container">
+                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION["login_id"] ; ?></div>
+                        <div class="email">Game ID : <?php echo $_SESSION["login_id"]; ?></div>
+                    </div>
+                    <div class="col-xs-4 col-xs-offset-4 info-container">
+                        <button onclick="location.href='logout.php';" type="button" class="btn btn-info waves-effect">
+                            <i class="material-icons">input</i>
+                            <span>Sign Out</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li id="m_home" class="active">
+                        <a onclick="d_home()">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li id="m_market">
+                        <a href="javascript:void(0);" onclick="d_market()">
+                            <i class="material-icons">trending_up</i>
+                            <span>Market</span>
+                        </a>
+                    </li>
+                    <li id="m_trans">
+                        <a onclick="d_trans()">
+                            <i class="material-icons">swap_vert</i>
+                            <span>Transaction History</span>
+                        </a>
+                    </li>
+                    <li id="m_news">
+                        <a onclick="d_news()">
+                            <i style="margin-top: 6px;font-size:24px" class="fa fa-newspaper-o" aria-hidden="true"></i>
+                            <span>News</span>
+                        </a>
+                    </li>
+                    <li id="m_rules">
+                        <a onclick="d_rules()">
+                            <i class="material-icons">edit</i>
+                            <span>Rules</span>
+                        </a>
+                    </li>
+                    <li id="m_dev">
+                        <a onclick="d_dev()">
+                            <i class="material-icons">code</i>
+                            <span>Developers</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal">
+                <div class="copyright">
+                    &copy; Wallstreet <a href="javascript:void(0);">Credenz '17</a>.
+                </div>
+                <div class="version">
+                    PICT IEEE Student Branch
+                </div>
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <div class="row clearfix">
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                <span style="color:green;">LIVE</span> STOCK MARKET
+                            </h2>
+                        </div>
+                        <div class="body table-responsive" style="height: calc(100vh - 100px);">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>COMPANY NAME</th>
+                                        <th>PRICE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td id="csp_1">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Mark</td>
+                                        <td id="csp_2">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Mark</td>
+                                        <td id="csp_3">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Mark</td>
+                                        <td id="csp_4">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>Mark</td>
+                                        <td id="csp_5">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Mark</td>
+                                        <td id="csp_6">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">7</th>
+                                        <td>Mark</td>
+                                        <td id="csp_7">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">8</th>
+                                        <td>Mark</td>
+                                        <td id="csp_8">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">9</th>
+                                        <td>Mark</td>
+                                        <td id="csp_9">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">10</th>
+                                        <td>Mark</td>
+                                        <td id="csp_10">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">11</th>
+                                        <td>Mark</td>
+                                        <td id="csp_11">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">12</th>
+                                        <td>Mark</td>
+                                        <td id="csp_12">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">13</th>
+                                        <td>Mark</td>
+                                        <td id="csp_13">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">14</th>
+                                        <td>Mark</td>
+                                        <td id="csp_14">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">15</th>
+                                        <td>Mark</td>
+                                        <td id="csp_15">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">16</th>
+                                        <td>Mark</td>
+                                        <td id="csp_16">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">17</th>
+                                        <td>Mark</td>
+                                        <td id="csp_17">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">18</th>
+                                        <td>Mark</td>
+                                        <td id="csp_18">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">19</th>
+                                        <td>Mark</td>
+                                        <td id="csp_19">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">20</th>
+                                        <td>Mark</td>
+                                        <td id="csp_20">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">21</th>
+                                        <td>Mark</td>
+                                        <td id="csp_21">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">22</th>
+                                        <td>Mark</td>
+                                        <td id="csp_22">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">23</th>
+                                        <td>Mark</td>
+                                        <td id="csp_23">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">24</th>
+                                        <td>Mark</td>
+                                        <td id="csp_24">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">25</th>
+                                        <td>Mark</td>
+                                        <td id="csp_25">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">26</th>
+                                        <td>Mark</td>
+                                        <td id="csp_26">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">27</th>
+                                        <td>Mark</td>
+                                        <td id="csp_27">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">28</th>
+                                        <td>Mark</td>
+                                        <td id="csp_28">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">29</th>
+                                        <td>Mark</td>
+                                        <td id="csp_29">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">30</th>
+                                        <td>Mark</td>
+                                        <td id="csp_30">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">31</th>
+                                        <td>Mark</td>
+                                        <td id="csp_31">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">32</th>
+                                        <td>Mark</td>
+                                        <td id="csp_32">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">33</th>
+                                        <td>Mark</td>
+                                        <td id="csp_33">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">34</th>
+                                        <td>Mark</td>
+                                        <td id="csp_34">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">35</th>
+                                        <td>Mark</td>
+                                        <td id="csp_35">0</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">36</th>
+                                        <td>Mark</td>
+                                        <td id="csp_36">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+    <!-- Home -->
+    <section id="homep" class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>DASHBOARD</h2>
+            </div>
+            <!-- Widgets -->
+            <div class="row clearfix">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <div class="info-box-3 bg-pink hover-expand-effect">
+                        <div class="icon">
+                            <i style="margin-bottom: 4px;" class="fa fa-rupee" aria-hidden="true"></i>
+                        </div>
+                        <div class="content" id="t1" onclick="getCash()">
+                            <div class="text">TOTAL CASH</div>
+                            <div id="cash" class="number">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <div class="info-box-3 bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <i style="margin-bottom: 4px;" class="fa fa-briefcase" aria-hidden="true"></i>
+                        </div>
+                        <div class="content">
+                            <div class="text">TOTAL ASSETS</div>
+                            <div id="assets" class="number">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" id="newcom">
+                    <div class="info-box-3 bg-light-green hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">forum</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">NEW COM</div>
+                            <div class="number">243</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" id="totplay">
+                    <div class="info-box-3 bg-orange hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">people</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">TOTAL PLAYERS</div>
+                            <div class="number">243</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Widgets -->
+            <div class="row clearfix">
+                <!-- Transaction -->
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                MY SHARES
+                            </h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>COMPANY NAME</th>
+                                        <th>STOCKS</th>
+                                        <th>COST PRICE</th>
+                                        <th>CURR. PRICE</th>
+                                        <th>STATUS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="myshares">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--#Transaction-->
+                <!--News Alerts-->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                NEWS ALERTS
+                            </h2>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>NEWS DESCRIPTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="newsTitleHere">
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Larry</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>Larry</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--#News Alerts-->
+            </div>
+        </div>
+    </section>
+    <!-- Market -->
+    <section id="marketp" class="content" style="display:none">
+        <div class="container-fluid">
+            <!-- Buy Stocks -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                BUY STOCKS
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <form id="form_advanced_validation" method="POST">
+                                    <div class="col-md-3" id="buy_list1">
+                                       
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <div class="form-group form-float" style="margin-top: 22px;padding-left:15px;">
+                                            <div class="form-line">
+                                                <input type="number" class="form-control" name="nostocks" min="0" max="30" required>
+                                                <label class="form-label">No. of Stocks</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <div class="form-group form-float" style="margin-top: 22px;padding-right:15px;">
+                                            <div class="form-line">
+                                                <input type="number" class="form-control" name="price" min="0" max="2000" required>
+                                                <label class="form-label">Price</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary waves-effect buy_btn" style="" type="submit">BUY</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Buy Stocks -->
+            <!-- Sell Stocks -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                SELL STOCKS
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <form id="form_advanced_validation" method="POST">
+                                    <div class="col-md-3">
+                                        <p style="font-size:13px;padding-left:15px;margin-bottom:5px;color:#9e9e9e">
+                                            Company Name
+                                        </p>
+                                        <select id="sell_list" class="form-control show-tick" data-live-search="true">
+                                        <option>Company #1</option>
+                                        <option>Company #2</option>
+                                        <option>Company #3</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <div class="form-group form-float" style="margin-top: 22px;padding-left:15px;">
+                                            <div class="form-line">
+                                                <input type="number" class="form-control" name="nostocks" min="0" max="30" required>
+                                                <label class="form-label">No. of Stocks</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-xs-6">
+                                        <div class="form-group form-float" style="margin-top: 22px;padding-right:15px;">
+                                            <div class="form-line">
+                                                <input type="number" class="form-control" name="price" min="0" max="2000" required>
+                                                <label class="form-label">Price</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary waves-effect buy_btn" style="" type="submit">SELL</button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Sell Stocks -->
+        </div>
+    </section>
+    <!-- Transaction History -->
+    <section id="transp" class="content" style="display:none;">
+        <div class="row clearfix">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            TRANSACTION HISTORY
+                        </h2>
+                    </div>
+                    <div class="body table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>COMPANY NAME</th>
+                                    <th>NO. OF STOCKS</th>
+                                    <th>TOTAL PRICE</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="givemetrans">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- News -->
+    <section id="newsp" class="content" style="display:none;">
+        <div class="row clearfix">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            NEWS SUMMARY
+                        </h2>
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-xs-12 ol-sm-12 col-md-12 col-lg-12">
+                                <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                    <div id="newsHere">
+                                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Company Details -->
+    <section id="companyp" class="content" style="display:none;">
+        <div class="container-fluid">
+            <!-- Counter Examples -->
+            <div class="block-header">
+                <h2>
+                    COMPANY DETAILS
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box-3 bg-red">
+                        <div class="icon">
+                            <i class="material-icons">shopping_cart</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">NEW ORDERS</div>
+                            <div class="number count-to" data-from="0" data-to="125" data-speed="1000" data-fresh-interval="20">125</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box-3 bg-indigo">
+                        <div class="icon">
+                            <i class="material-icons">face</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">NEW MEMBERS</div>
+                            <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20">257</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box-3 bg-purple">
+                        <div class="icon">
+                            <i class="material-icons">bookmark</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">BOOKMARKS</div>
+                            <div class="number count-to" data-from="0" data-to="117" data-speed="1000" data-fresh-interval="20">117</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box-3 bg-deep-purple">
+                        <div class="icon">
+                            <i class="material-icons">favorite</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">LIKES</div>
+                            <div class="number count-to" data-from="0" data-to="1432" data-speed="1500" data-fresh-interval="20">1432</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--  Rules  -->
+
+    <!-- Devlopers -->
+
+    <!-- Jquery Core Js -->
+   <script src="plugins/jquery/jquery.min.js"></script> 
+   
+
+    <!-- Bootstrap Core Js -->
+    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery Validation Plugin Css -->
+    <script src="plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="plugins/jquery-countto/jquery.countTo.js"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="plugins/raphael/raphael.min.js"></script>
+    <script src="plugins/morrisjs/morris.js"></script>
+
+    <!-- ChartJs -->
+    <script src="plugins/chartjs/Chart.bundle.js"></script>
+
+    <!-- Flot Charts Plugin Js -->
+    <script src="plugins/flot-charts/jquery.flot.js"></script>
+    <script src="plugins/flot-charts/jquery.flot.resize.js"></script>
+    <script src="plugins/flot-charts/jquery.flot.pie.js"></script>
+    <script src="plugins/flot-charts/jquery.flot.categories.js"></script>
+    <script src="plugins/flot-charts/jquery.flot.time.js"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="plugins/jquery-sparkline/jquery.sparkline.js"></script>
+
+    <!-- Custom Js -->
+    <script src="js/admin.js"></script>
+    <script src="js/pages/index.js"></script>
+    <script src="js/pages/forms/advanced-form-elements.js"></script>
+    <script src="js/pages/forms/form-validation.js"></script>
+
+    <!-- Demo Js -->
+    <script src="js/demo.js"></script>
+
+    <script>
+      //          $(document).ready(function() {
+      //             $.ajax({
+      //  	              url: 'cash.php',
+      //                  data: "",
+      //                  dataType: 'json',
+      //                  success: function(data) {
+      //                      var tot_cash = data[0];
+      //                      var tot_assets = data[1];
+      //                      $('#cash').html(tot_cash);
+      //                      $('#assets').html(tot_assets);
+      //                  }
+      //              });
+      //          });
+                
+
+        setInterval(function getCash() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var obj = JSON.parse(this.responseText);
+                    document.getElementById('cash').innerHTML = obj.total_cash;
+                    document.getElementById('assets').innerHTML = obj.total_assets;
+                }
+            };
+            xhttp.open("GET", "cash.php", true);
+            xhttp.send();
+        },2000);
+        
+        var i=1;
+        setInterval(function getcsp() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var obj = JSON.parse(this.responseText);
+                    for(i=1;i<=36;i++)
+                    {
+                        document.getElementById("csp_"+i).innerHTML = obj[i-1];
+                    }
+                    //document.getElementById('cash').innerHTML = obj.total_cash;
+                }
+            };
+            xhttp.open("GET", "csp.php", true);
+            xhttp.send();
+        },1000);
+        
+        function getmyshare() {
+            $('#myshares').load('myshares.php');
+            setInterval(function() {
+                $('#myshares').load('myshares.php');
+            },5000)
+        };
+        getmyshare();
+ 
+        function getTrans(){
+	       $('#givemetrans').load('transaction.php');
+	       setInterval(function(){
+	       $('#givemetrans').load('transaction.php');
+        },5000)};
+        getTrans();
+        
+         function getNews(){
+				$('#newsHere').load('news_display.php');
+				setInterval(function(){
+				$('#newsHere').load('news_display.php');
+			},60000)};
+			getNews();
+			
+			
+         function getTitleNews(){
+				$('#newsTitleHere').load('news_title_display.php');
+				setInterval(function(){
+				$('#newsTitleHere').load('news_title_display.php');
+			},60000)};
+			getTitleNews();
+			
+			function getBuySellCompany(){
+				$('#buy_list1').load('buysellcompany_display.php?q=1');
+				$('#sell_list1').load('buysellcompany_display.php?q=2');
+				setInterval(function(){
+				$('#buy_list1').load('buysellcompany_display.php?q=1');
+				$('#sell_list1').load('buysellcompany_display.php?q=2');
+			},5000)};
+
+			getBuySellCompany();
+    </script>
+</body>
+
+</html>

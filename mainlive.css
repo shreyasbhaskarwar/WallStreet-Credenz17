@@ -1,0 +1,154 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: '';
+}
+
+#main {
+    background-color: rgba(200,200,255,.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: 90vh;
+    width: 100%;
+    display: inline-flex;
+    padding-top: 10vh;
+}
+
+#head {
+    background-image: url(images4darker2.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 10vh;
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+    box-shadow: 0px 6px 10px gray;
+}
+
+#head img {
+    position: absolute;
+    z-index: 99999;
+    height: 10vh;
+    padding: 10px;
+}
+
+#head p {
+    color: #fff;
+    font-size: 6vh;
+    line-height: 10vh;
+}
+#foot {
+    background-image: url(images4darker2.png);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 10vh;
+    position: absolute;
+    bottom: 0;
+    z-index: 9999;
+    display: inline-flex;
+    overflow: hidden;
+    
+}
+
+#foot img {
+    height: 9vh;
+    background-color: white;
+}
+
+.white {
+    height: 10vh;
+    margin: 3px 1.5px 3px 1.5px;
+}
+
+.music {
+    background: #fff;
+    z-index: -1;
+    height: 100vh;
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.placeholder {
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.soundwave {
+    position: absolute;
+    height: 60vh;
+    width: 300%;
+    margin: 20vh 0;
+    overflow-y: hidden;
+/*    animation: slide-left 300s linear infinite;*/
+}
+
+.freq {
+    width: 8px;
+    border-radius: 8px;
+    margin: 0 1px;
+    background-color: teal;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.freq.h-100 {
+    height: 100%;
+}
+
+.freq.h-90 {
+    height: 90%;
+}
+
+.freq.h-80 {
+    height: 80%;
+}
+
+.freq.h-70 {
+    height: 70%;
+}
+
+.freq.h-60 {
+    height: 60%;
+}
+
+.freq.h-50 {
+    height: 50%;
+}
+
+.freq.h-40 {
+    height: 40%;
+}
+
+.freq.h-30 {
+    height: 30%;
+}
+
+.freq.h-20 {
+    height: 20%;
+}
+
+.freq.h-10 {
+    height: 10%;
+}
+
+.freq.h-5 {
+    height: 5%;
+}
+
+@keyframes slide-left {
+    100% {
+        transform: translateX(-200.6rem);
+    }
+}

@@ -1,0 +1,40 @@
+<?php
+//include('session.php');
+session_start();
+include_once("connection.php");
+if(!isset($_SESSION['login_id'])){
+    header("location: sign-in.php");
+}
+
+try{
+	if($_GET['q']==1){	
+				$stmt=$conn->query("Select comp_name from company where active_status=1");
+				//$stmt=$conn->prepare();
+				$stmt->execute();
+				echo ' <p style="font-size:13px;padding-left:15px;margin-bottom:5px;color:#9e9e9e">
+                                            Company Name
+                                        </p><select id="buy_list" class="form-control show-tick" data-live-search="true">';			
+				foreach($stmt as $row){
+					echo "<option>".$row['comp_name']."</option>";	
+				}
+			
+				echo '</select>';
+			}
+	else{
+	$stmt=$conn->query("Select comp_name from company where active_status=1");
+				//$stmt=$conn->prepare();
+				$stmt->execute();
+				echo ' <p style="font-size:13px;padding-left:15px;margin-bottom:5px;color:#9e9e9e">
+                                            Company Name
+                                        </p><select id="sell_list" class="form-control show-tick" data-live-search="true">';			
+				foreach($stmt as $row){
+					echo "<option>".$row['comp_name']."</option>";	
+				}
+			
+				echo '</select>';
+	
+	}
+	catch(Exception $e){
+		echo "Error Message: "+$e->getMessage();
+	}
+?>

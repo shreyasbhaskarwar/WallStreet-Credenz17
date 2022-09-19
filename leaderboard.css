@@ -1,0 +1,175 @@
+@import 'https://fonts.googleapis.com/css?family=Ubuntu';
+* {
+    outline: none;
+    user-select: none;
+}
+
+#leaderboard {
+    background-color: #123;
+    color: #eee;
+    border-radius: 5px;
+    box-shadow: 2px 5px 15px rgba(17, 34, 51, 0.5);
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 15px;
+    margin-left: 40px;
+    height: fit-content;
+}
+
+#header1 {
+    text-align: center;
+}
+
+#header1 h2 {
+    padding: 15px 0;
+    margin: 0;
+    text-align: center;
+}
+
+#leaderboard h2 {
+    padding: 15px 0;
+    margin: 0;
+    text-align: center;
+}
+
+#leaderboard p {
+    margin: 3px 10px;
+    text-align: right;
+}
+
+#leaderboard ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#leaderboard ol li {
+    counter-increment: leaderboard-num;
+    padding: 15px 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+#leaderboard ol li::before {
+    content: counter(leaderboard-num);
+    display: block;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    color: #345;
+    text-align: center;
+    position: absolute;
+    left: 15px;
+}
+
+#leaderboard ol li span {
+    font-family: 'Quicksand';
+}
+
+#leaderboard ol li:nth-of-type(1) {
+    background-color: #4d5e6f;
+}
+
+#leaderboard ol li:nth-of-type(2) {
+    background-color: #435465;
+}
+
+#leaderboard ol li:nth-of-type(3) {
+    background-color: #4d5e6f;
+}
+
+#leaderboard ol li:nth-of-type(4) {
+    background-color: #435465;
+}
+
+#leaderboard ol li:nth-of-type(5) {
+    background-color: #4d5e6f;
+}
+
+#leaderboard ol li:nth-of-type(6) {
+    background-color: #435465;
+}
+
+#leaderboard ol li:nth-of-type(7) {
+    background-color: #4d5e6f;
+}
+
+#leaderboard ol li:nth-of-type(8) {
+    background-color: #435465;
+}
+
+#leaderboard ol li:nth-of-type(9) {
+    background-color: #4d5e6f;
+}
+
+#leaderboard ol li:nth-of-type(10) {
+    background-color: #435465;
+}
+
+#wall {
+    background-color: #123;
+    color: #eee;
+    border-radius: 5px;
+    box-shadow: 2px 5px 15px rgba(17, 34, 51, 0.5);
+    vertical-align: middle;
+    padding-bottom: 15px;
+}
+
+#updates {
+    background-color: #123;
+    color: #eee;
+    border-radius: 5px;
+    box-shadow: 2px 5px 15px rgba(17, 34, 51, 0.5);
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 15px;
+    margin-left: 5px;
+    height: 575px;
+}
+
+#updates ol li {
+    padding: 13px 25px;
+    position: relative;
+    font-size: 19px;
+    background-color: #4d5e6f;
+    font-family: 'Quicksand';
+}
+
+#updates ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#hot {
+    background-color: #123;
+    color: #eee;
+    border-radius: 5px;
+    box-shadow: 2px 5px 15px rgba(17, 34, 51, 0.5);
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 15px;
+    margin-left: 5px;
+    height: 100%;
+}
+
+#hot div {
+    padding: 13px 25px;
+    position: relative;
+    font-size: 19px;
+    background-color: #4d5e6f;
+    font-family: 'Quicksand';
+    height: 92%;
+}
+
+#hot ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}

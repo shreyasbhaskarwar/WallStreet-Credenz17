@@ -1,0 +1,12 @@
+<?php
+	session_start();
+    require_once "connection.php";
+    $stmt = $conn->prepare('SELECT company.comp_name,shares.no_stocks,company.comp_csp FROM shares INNER JOIN company ON shares.comp_id = company.comp_id WHERE shares.user_id=:userid ORDER BY comp_name');
+    $stmt->bindParam(':userid', $_SESSION['login_id']);
+    $stmt->execute();
+    $i=1;
+    foreach ($stmt as $row) {
+        echo "<tr><th scope='row'> $i </th><td>".$row[0]."</td><td>".$row[1]."</td><td>0</td><td>".$row[2]."</td><td>0</td></tr>";
+    $i++;
+    }
+?>
